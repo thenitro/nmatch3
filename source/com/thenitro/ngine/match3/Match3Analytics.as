@@ -1,16 +1,26 @@
 package com.thenitro.ngine.match3 {
-	import com.thenitro.ngine.grid.GridContainer;
-	import com.thenitro.ngine.grid.IGridContainer;
-	import com.thenitro.ngine.grid.IGridObject;
+	import com.thenitro.ngine.grid.interfaces.IGridContainer;
+	import com.thenitro.ngine.grid.interfaces.IGridObject;
 	import com.thenitro.ngine.math.GraphUtils;
 	import com.thenitro.ngine.pool.Pool;
 	
+	import flash.events.TimerEvent;
+	import flash.utils.Timer;
 	import flash.utils.getTimer;
 	
-	public class Match3Analytics {
+	import starling.events.Event;
+	import starling.events.EventDispatcher;
+	
+	public class Match3Analytics extends EventDispatcher {
+		public static const TIME_OUT_EVENT:String     = 'think_too_much';
+		public static const TURNS_FINDED_EVENT:String = 'turns_finded';
+		
 		protected static var _pool:Pool = Pool.getInstance(); 
 		
+		private static const WAIT_TIME:uint    = 5000;
 		private static const EMPTY_ARRAY:Array = [];
+		
+		private var _timer:Timer;
 		
 		private var _startTime:uint;
 		private var _thinkTime:uint;
@@ -23,7 +33,14 @@ package com.thenitro.ngine.match3 {
 		private var _multiplier:Number;
 		
 		public function Match3Analytics() {
+			super();
 			
+			_timer = new Timer(WAIT_TIME, 1);
+			_timer.addEventListener(TimerEvent.TIMER_COMPLETE, timerEventHandler);
+		};
+		
+		public final function get turnsCount():uint {
+			return _currTurns;
 		};
 		
 		public final function getStartTime():uint {
@@ -34,18 +51,16 @@ package com.thenitro.ngine.match3 {
 			_waveDepth = pValue;
 		};
 		
+		public function findPossibleMoves(pGrid:IGridContainer, pNextObject:IGridObject = null):void {
+			
+		};
+		
 		public final function calculatePlayerSkill(pRemovedMobs:uint):Number {
 			pRemovedMobs = pRemovedMobs ? pRemovedMobs : 1;
 			
 			var turnsDelta:Number   = Math.abs(_prevTurns - _currTurns ? _prevTurns - _currTurns : 1);
 			var turnsToThink:Number = turnsDelta / (_thinkTime / 1000);
 			var waveDelta:Number    = pRemovedMobs / _waveDepth;
-			
-			trace("Match3Analytics.calculatePlayerSkill(pRemovedMobs) turns delta", turnsDelta);
-			trace("Match3Analytics.calculatePlayerSkill(pRemovedMobs) turns think", turnsToThink, _thinkTime);
-			trace("Match3Analytics.calculatePlayerSkill(pRemovedMobs) removed", pRemovedMobs);
-			trace("Match3Analytics.calculatePlayerSkill(pRemovedMobs) delta", waveDelta);
-			trace("Match3Analytics.calculatePlayerSkill(pRemovedMobs)", turnsToThink * waveDelta);
 			
 			return turnsToThink * waveDelta;
 		};
@@ -60,12 +75,21 @@ package com.thenitro.ngine.match3 {
 		
 		public final function start():void {
 			_startTime = getTimer();
+			
+			_timer.start();
 		};
 		
 		public final function stop():uint {
 			_thinkTime = getTimer() - _startTime;
 			
+			_timer.stop();
+			_timer.reset();
+			
 			return _thinkTime;
+		};
+		
+		private function timerEventHandler(pEvent:TimerEvent):void {
+			dispatchEventWith(TIME_OUT_EVENT);
 		};
 	};
 }

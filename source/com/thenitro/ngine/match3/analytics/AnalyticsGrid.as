@@ -1,11 +1,11 @@
 package com.thenitro.ngine.match3.analytics {
 	import com.thenitro.ngine.grid.Grid;
-	import com.thenitro.ngine.grid.IGridContainer;
+	import com.thenitro.ngine.grid.interfaces.IGridContainer;
 	
 	public class AnalyticsGrid extends Grid {
 		
 		public function AnalyticsGrid() {
-			super();
+			super(0, 0);
 		};
 		
 		override public function clone():IGridContainer {

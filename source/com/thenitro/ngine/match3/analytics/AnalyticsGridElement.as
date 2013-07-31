@@ -1,5 +1,5 @@
 package com.thenitro.ngine.match3.analytics {
-	import com.thenitro.ngine.grid.IGridObject;
+	import com.thenitro.ngine.grid.interfaces.IGridObject;
 	import com.thenitro.ngine.pool.IReusable;
 	import com.thenitro.ngine.pool.Pool;
 	
@@ -10,6 +10,8 @@ package com.thenitro.ngine.match3.analytics {
 		private var _indexY:uint;
 		
 		private var _reflection:Class;
+		
+		private var _locked:Boolean;
 		
 		public function AnalyticsGridElement() {
 		}
@@ -33,6 +35,10 @@ package com.thenitro.ngine.match3.analytics {
 			return _indexY;
 		};
 		
+		public function get locked():Boolean {
+			return _locked;
+		};
+		
 		public function get reflection():Class {
 			return _reflection;
 		};
@@ -46,6 +52,10 @@ package com.thenitro.ngine.match3.analytics {
 			_indexY = pY;
 		};
 		
+		public function lock():void {
+			_locked = true;
+		};
+		
 		public function clone():IGridObject {
 			var copy:AnalyticsGridElement = _pool.get(AnalyticsGridElement) as AnalyticsGridElement;
 			
@@ -56,6 +66,10 @@ package com.thenitro.ngine.match3.analytics {
 			
 				copy.updateIndex(indexX, indexY);
 				copy.setReflection(reflection);
+				
+				if (locked) {
+					lock();
+				}
 			
 			return copy;
 		};

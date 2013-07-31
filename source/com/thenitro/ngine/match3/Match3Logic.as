@@ -1,11 +1,11 @@
 package com.thenitro.ngine.match3 {
 	import com.thenitro.monsterinarow.global.Global;
 	import com.thenitro.monsterinarow.global.monsters.Monster;
-	import com.thenitro.ngine.grid.GridAnimator;
 	import com.thenitro.ngine.grid.GridContainer;
-	import com.thenitro.ngine.grid.IGridContainer;
-	import com.thenitro.ngine.grid.IGridGenerator;
-	import com.thenitro.ngine.grid.IGridObject;
+	import com.thenitro.ngine.grid.animation.GridAnimator;
+	import com.thenitro.ngine.grid.interfaces.IGridContainer;
+	import com.thenitro.ngine.grid.interfaces.IGridGenerator;
+	import com.thenitro.ngine.grid.interfaces.IGridObject;
 	import com.thenitro.ngine.math.GraphUtils;
 	import com.thenitro.ngine.pool.Pool;
 	
@@ -24,10 +24,14 @@ package com.thenitro.ngine.match3 {
 		public static const FLOOD_EVENT:String     = 'floodEvent';
 		public static const TURNS_CHANGED:String   = 'turnsChangedEvent';
 		public static const GAME_OVER_EVENT:String = 'gameOverEvent';
+		public static const SWAP_ANIMATION:String  = 'swapAnimatedEvent';
 		
 		public static const ANIMATION_TIME:Number  = 0.35;
+		
 		public static const FLOOD_TIME:Number      = 0.35;
 		public static const FLOOD_DELAY:Number     = 0.25;
+		
+		public static const SWAP_TIME:Number       = 0.15;
 		
 		protected static var _pool:Pool = Pool.getInstance();
 		
@@ -49,14 +53,7 @@ package com.thenitro.ngine.match3 {
 		
 		private var _availableMonsters:Vector.<Class>;
 		
-		public function Match3Logic(pMonsterSizeX:uint, pMonsterSizeY:uint, pGenerator:IGridGenerator) {
-			_cellWidth  = pMonsterSizeX;
-			_cellHeight = pMonsterSizeY;
-			
-			_generator  = pGenerator;
-			
-			_animator   = new GridAnimator();
-			
+		public function Match3Logic() {
 			super();
 		};
 		
@@ -75,13 +72,26 @@ package com.thenitro.ngine.match3 {
 		public function get gemsNum():uint {
 			return _gemsNum;
 		};
+		
+		public function get turns():int {
+			return -1;
+		};
 
 		public function set gemsNum(pValue:uint):void {
 			_availableMonsters = Global.MONSTERS.slice(0, pValue);
 			_gemsNum           = pValue;
 		};
 		
-		public function findGrid(pGrid:GridContainer, pDepth:uint):void {
+		public function init(pMonsterSizeX:uint, pMonsterSizeY:uint, 
+							 pGenerator:IGridGenerator, pAnimator:GridAnimator):void {
+			_cellWidth  = pMonsterSizeX;
+			_cellHeight = pMonsterSizeY;
+			
+			_generator  = pGenerator;
+			_animator   = pAnimator;
+		};
+		
+		public function findGrid(pGrid:IGridContainer, pDepth:uint):void {
 			_rowIndex = 0;
 			_grid     = pGrid;
 			_depth    = pDepth;
@@ -103,19 +113,10 @@ package com.thenitro.ngine.match3 {
 			
 			if (samples.length >= pDepth) {
 				for each (var monster:Monster in samples) {					
-					pGrid.remove(monster.indexX, monster.indexY);
-					pGrid.removeVisual(monster);
-					
-					_animator.remove(monster);
-					
-					_itemsRemoved++;
-					
-					dispatchEventWith(ITEM_REMOVED, false, { 
-						positionX: monster.x, positionY: monster.y, 
-						deadTextureID: monster.deadTextureID });
-					
-					flood(monster.indexX, monster.indexY, pGrid);
+					removeItem(monster, pGrid);
 				}
+				
+				dispatchEventWith(MATCH_FINDED, false, samples);
 				
 				for each (monster in samples) {
 					_pool.put(monster);
@@ -124,14 +125,30 @@ package com.thenitro.ngine.match3 {
 				_animator.addEventListener(ITEM_FINDED, itemFindedEventHandler);
 				_animator.start(ITEM_FINDED);
 				
-				dispatchEventWith(MATCH_FINDED);
-				
 				return true;
 			}
 			
 			dispatchEventWith(ITEM_FINDED);
 			
 			return false;
+		};
+		
+		public function removeItem(pMonster:IGridObject, pGrid:IGridContainer):void {
+			if (!pMonster) {
+				return;
+			}
+			
+			pGrid.remove(pMonster.indexX, pMonster.indexY);
+			pGrid.removeVisual(pMonster);
+			
+			_animator.remove(pMonster);
+			
+			_itemsRemoved++;
+			
+			dispatchEventWith(ITEM_REMOVED, false, { 
+				positionX: pMonster.x, positionY: pMonster.y, object: pMonster });
+			
+			flood(pMonster.indexX, pMonster.indexY, pGrid);
 		};
 		
 		public function pushTop(pX:uint, pY:uint, pGrid:IGridContainer):void {
@@ -159,6 +176,22 @@ package com.thenitro.ngine.match3 {
 			Starling.juggler.add(tween);
 			
 			pGrid.addVisual(pGrid.add(pIndexX, 0, newGem));
+		};
+		
+		public function swap(pAX:uint, pAY:uint, pBX:uint, pBY:uint, pGrid:IGridContainer):void {
+			var objectA:Monster = pGrid.take(pAX, pAY) as Monster; 
+			var objectB:Monster = pGrid.take(pBX, pBY) as Monster; 
+			
+			pGrid.swap(pAX, pAY, pBX, pBY);
+			
+			_animator.add(objectA, pBX * _cellWidth, pBY * _cellHeight, SWAP_TIME);
+			_animator.add(objectB, pAX * _cellWidth, pAY * _cellHeight, SWAP_TIME);
+			
+			_animator.start(SWAP_ANIMATION);
+		};
+		
+		public function checkTurns():void {
+			
 		};
 		
 		public function clean():void {
