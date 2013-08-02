@@ -1,6 +1,4 @@
 package com.thenitro.ngine.match3 {
-	import com.thenitro.monsterinarow.global.Global;
-	import com.thenitro.monsterinarow.global.monsters.Monster;
 	import com.thenitro.ngine.grid.GridContainer;
 	import com.thenitro.ngine.grid.animation.GridAnimator;
 	import com.thenitro.ngine.grid.interfaces.IGridContainer;
@@ -41,7 +39,7 @@ package com.thenitro.ngine.match3 {
 		protected var _cellWidth:uint;
 		protected var _cellHeight:uint;		
 		
-		private var _gemsNum:uint;
+		private var _itemsNum:uint;
 		
 		private var _itemsRemoved:uint = 0;
 		
@@ -51,9 +49,12 @@ package com.thenitro.ngine.match3 {
 		
 		private var _grid:IGridContainer;
 		
-		private var _availableMonsters:Vector.<Class>;
+		private var _types:Vector.<Class>;
+		private var _availableTypes:Vector.<Class>;
 		
-		public function Match3Logic() {
+		public function Match3Logic(pTypes:Vector.<Class>) {
+			_types = pTypes;
+			
 			super();
 		};
 		
@@ -62,30 +63,30 @@ package com.thenitro.ngine.match3 {
 		};
 		
 		public function get availableMonsters():Vector.<Class> {
-			return _availableMonsters;
+			return _availableTypes;
 		};
 		
 		public function get animator():GridAnimator {
 			return _animator;
 		};
 		
-		public function get gemsNum():uint {
-			return _gemsNum;
+		public function get itemsNum():uint {
+			return _itemsNum;
 		};
 		
 		public function get turns():int {
 			return -1;
 		};
 
-		public function set gemsNum(pValue:uint):void {
-			_availableMonsters = Global.MONSTERS.slice(0, pValue);
-			_gemsNum           = pValue;
+		public function set itemsNum(pValue:uint):void {
+			_availableTypes = _types.slice(0, pValue);
+			_itemsNum        = pValue;
 		};
 		
-		public function init(pMonsterSizeX:uint, pMonsterSizeY:uint, 
+		public function init(pCellWidth:uint, pCellHeight:uint, 
 							 pGenerator:IGridGenerator, pAnimator:GridAnimator):void {
-			_cellWidth  = pMonsterSizeX;
-			_cellHeight = pMonsterSizeY;
+			_cellWidth  = pCellWidth;
+			_cellHeight = pCellHeight;
 			
 			_generator  = pGenerator;
 			_animator   = pAnimator;
@@ -112,14 +113,14 @@ package com.thenitro.ngine.match3 {
 			var samples:Array = GraphUtils.bfs(pX, pY, pGrid);
 			
 			if (samples.length >= pDepth) {
-				for each (var monster:Monster in samples) {					
-					removeItem(monster, pGrid);
+				for each (var item:IGridObject in samples) {					
+					removeItem(item, pGrid);
 				}
 				
 				dispatchEventWith(MATCH_FINDED, false, samples);
 				
-				for each (monster in samples) {
-					_pool.put(monster);
+				for each (item in samples) {
+					_pool.put(item);
 				}
 				
 				_animator.addEventListener(ITEM_FINDED, itemFindedEventHandler);
@@ -155,8 +156,8 @@ package com.thenitro.ngine.match3 {
 			var animate:Boolean;
 			
 			for (var i:int = pY; i > 0; i--) {
-				var objectA:Monster = pGrid.take(pX, i) as Monster; 
-				var objectB:Monster = pGrid.take(pX, i - 1) as Monster; 
+				var objectA:IGridObject = pGrid.take(pX, i); 
+				var objectB:IGridObject = pGrid.take(pX, i - 1); 
 				
 				pGrid.swap(pX, i, pX, i - 1);
 				
@@ -166,7 +167,8 @@ package com.thenitro.ngine.match3 {
 		};
 		
 		public function dropNew(pIndexX:uint, pIndexY:uint, pGrid:GridContainer):void {
-			var newGem:IGridObject = _generator.generateOne(pIndexX, 0, pGrid, _availableMonsters, _cellWidth, _cellHeight);
+			var newGem:IGridObject = _generator.generateOne(pIndexX, 0, pGrid, 
+										_availableTypes, _cellWidth, _cellHeight);
 				newGem.alpha = 0.0;
 			
 			var tween:Tween = new Tween(newGem, ANIMATION_TIME);
@@ -179,8 +181,8 @@ package com.thenitro.ngine.match3 {
 		};
 		
 		public function swap(pAX:uint, pAY:uint, pBX:uint, pBY:uint, pGrid:IGridContainer):void {
-			var objectA:Monster = pGrid.take(pAX, pAY) as Monster; 
-			var objectB:Monster = pGrid.take(pBX, pBY) as Monster; 
+			var objectA:IGridObject = pGrid.take(pAX, pAY); 
+			var objectB:IGridObject = pGrid.take(pBX, pBY); 
 			
 			pGrid.swap(pAX, pAY, pBX, pBY);
 			

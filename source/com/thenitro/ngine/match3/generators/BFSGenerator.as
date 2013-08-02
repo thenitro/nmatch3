@@ -44,7 +44,7 @@ package com.thenitro.ngine.match3.generators {
 			
 			pGrid.add(pI, pJ, item);
 			
-			while (GraphUtils.bfs(pI, pJ, pGrid).length > _waveSize - _playerSkill) {
+			while (GraphUtils.bfs(pI, pJ, pGrid).length >= _waveSize - _playerSkill) {
 				item = generateItem(pElements, pCellWidth, pCellHeight);
 				
 				pGrid.add(pI, pJ, item);
