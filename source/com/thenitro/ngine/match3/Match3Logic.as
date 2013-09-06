@@ -4,6 +4,7 @@ package com.thenitro.ngine.match3 {
 	import com.thenitro.ngine.grid.interfaces.IGridContainer;
 	import com.thenitro.ngine.grid.interfaces.IGridGenerator;
 	import com.thenitro.ngine.grid.interfaces.IGridObject;
+	import com.thenitro.ngine.grid.interfaces.IVisualGridObject;
 	import com.thenitro.ngine.math.GraphUtils;
 	import com.thenitro.ngine.pool.Pool;
 	
@@ -134,22 +135,24 @@ package com.thenitro.ngine.match3 {
 			return false;
 		};
 		
-		public function removeItem(pMonster:IGridObject, pGrid:IGridContainer):void {
-			if (!pMonster) {
+		public function removeItem(pItem:IGridObject, pGrid:IGridContainer):void {			
+			if (!pItem) {
 				return;
 			}
 			
-			pGrid.remove(pMonster.indexX, pMonster.indexY);
-			pGrid.removeVisual(pMonster);
+			pGrid.remove(pItem.indexX, pItem.indexY);
+			pGrid.removeVisual(pItem);
 			
-			_animator.remove(pMonster);
+			_animator.remove(pItem);
 			
 			_itemsRemoved++;
 			
 			dispatchEventWith(ITEM_REMOVED, false, { 
-				positionX: pMonster.x, positionY: pMonster.y, object: pMonster });
+													positionX: pItem.indexX, 
+													positionY: pItem.indexY, 
+													object: pItem });
 			
-			flood(pMonster.indexX, pMonster.indexY, pGrid);
+			flood(pItem.indexX, pItem.indexY, pGrid);
 		};
 		
 		public function pushTop(pX:uint, pY:uint, pGrid:IGridContainer):void {
@@ -167,8 +170,8 @@ package com.thenitro.ngine.match3 {
 		};
 		
 		public function dropNew(pIndexX:uint, pIndexY:uint, pGrid:GridContainer):void {
-			var newGem:IGridObject = _generator.generateOne(pIndexX, 0, pGrid, 
-										_availableTypes, _cellWidth, _cellHeight);
+			var newGem:IVisualGridObject = _generator.generateOne(pIndexX, 0, pGrid, 
+																  _availableTypes, _cellWidth, _cellHeight) as IVisualGridObject;
 				newGem.alpha = 0.0;
 			
 			var tween:Tween = new Tween(newGem, ANIMATION_TIME);
