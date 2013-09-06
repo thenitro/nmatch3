@@ -58,9 +58,14 @@ package com.thenitro.ngine.match3 {
 		public final function calculatePlayerSkill(pRemovedMobs:uint):Number {
 			pRemovedMobs = pRemovedMobs ? pRemovedMobs : 1;
 			
-			var turnsDelta:Number   = Math.abs(_prevTurns - _currTurns ? _prevTurns - _currTurns : 1);
-			var turnsToThink:Number = turnsDelta / (_thinkTime / 1000);
-			var waveDelta:Number    = pRemovedMobs / _waveDepth;
+			var turnsDelta:Number   = Math.abs(_prevTurns - _currTurns ? _prevTurns - _currTurns : 1); //turns 
+			var turnsToThink:Number = turnsDelta / (_thinkTime / 1000); //time
+			var waveDelta:Number    = pRemovedMobs / _waveDepth; //combinations
+			
+			trace("Match3Analytics.calculatePlayerSkill(pRemovedMobs): " + turnsDelta);
+			trace("Match3Analytics.calculatePlayerSkill(pRemovedMobs): " + turnsToThink);
+			trace("Match3Analytics.calculatePlayerSkill(pRemovedMobs): " + waveDelta);
+			trace("Match3Analytics.calculatePlayerSkill(pRemovedMobs): " + (turnsToThink  * waveDelta));
 			
 			return turnsToThink * waveDelta;
 		};
