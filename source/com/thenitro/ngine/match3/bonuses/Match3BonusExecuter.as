@@ -26,6 +26,8 @@ package com.thenitro.ngine.match3.bonuses {
 		};
 		
 		public function executeTo(pX:uint, pY:uint, pBonus:IMatch3Bonus):void {
+			trace("Match3BonusExecuter.executeTo(pX, pY, pBonus)");
+			
 			pBonus.init(_grid, _logic, _depth);
 			pBonus.setCoords(pX, pY);
 			
