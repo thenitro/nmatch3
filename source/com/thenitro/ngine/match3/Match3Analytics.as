@@ -75,7 +75,7 @@ package com.thenitro.ngine.match3 {
 				return EMPTY_ARRAY;
 			}
 			
-			return GraphUtils.bfs(pElement.indexX, pElement.indexY, pGrid);
+			return GraphUtils.bfs(pElement.indexX, pElement.indexY, pGrid, GraphUtils.addNeighborsVerticalHorizintal);
 		};
 		
 		public final function start():void {

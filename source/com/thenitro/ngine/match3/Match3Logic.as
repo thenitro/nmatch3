@@ -111,7 +111,11 @@ package com.thenitro.ngine.match3 {
 		};
 		
 		public function findItem(pX:uint, pY:uint, pGrid:IGridContainer, pDepth:uint):Boolean {
-			var samples:Array = GraphUtils.bfs(pX, pY, pGrid);
+			var samples:Array = GraphUtils.bfs(pX, pY, pGrid, GraphUtils.addNeighborsVertical);
+			
+			if (samples.length < pDepth) {
+				samples = GraphUtils.bfs(pX, pY, pGrid, GraphUtils.addNeighborsHorizontal);
+			}
 			
 			if (samples.length >= pDepth) {
 				for each (var item:IGridObject in samples) {					
