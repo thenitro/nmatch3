@@ -1,14 +1,13 @@
 package com.thenitro.ngine.match3 {
-	import com.thenitro.ngine.grid.interfaces.IGridContainer;
-	import com.thenitro.ngine.grid.interfaces.IGridObject;
-	import com.thenitro.ngine.math.GraphUtils;
-	import com.thenitro.ngine.pool.Pool;
-	
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 	import flash.utils.getTimer;
 	
-	import starling.events.Event;
+	import ngine.collections.grid.interfaces.IGridObject;
+	import ngine.display.gridcontainer.interfaces.IGridContainer;
+	import ngine.math.GraphUtils;
+	import ngine.pool.Pool;
+	
 	import starling.events.EventDispatcher;
 	
 	public class Match3Analytics extends EventDispatcher {

@@ -1,7 +1,7 @@
 package com.thenitro.ngine.match3.bonuses {
-	import com.thenitro.ngine.bonuses.IBonus;
-	import com.thenitro.ngine.grid.interfaces.IGridContainer;
 	import com.thenitro.ngine.match3.Match3Logic;
+	
+	import ngine.display.gridcontainer.interfaces.IGridContainer;
 	
 	import starling.events.Event;
 	import starling.events.EventDispatcher;
@@ -38,7 +38,7 @@ package com.thenitro.ngine.match3.bonuses {
 			
 		};
 		
-		public function execute(pBonus:IBonus):void {
+		public function execute(pBonus:IMatch3Bonus):void {
 			pBonus.execute();
 		};
 		

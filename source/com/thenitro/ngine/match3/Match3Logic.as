@@ -1,12 +1,12 @@
 package com.thenitro.ngine.match3 {
-	import com.thenitro.ngine.grid.GridContainer;
-	import com.thenitro.ngine.grid.animation.GridAnimator;
-	import com.thenitro.ngine.grid.interfaces.IGridContainer;
-	import com.thenitro.ngine.grid.interfaces.IGridGenerator;
-	import com.thenitro.ngine.grid.interfaces.IGridObject;
-	import com.thenitro.ngine.grid.interfaces.IVisualGridObject;
-	import com.thenitro.ngine.math.GraphUtils;
-	import com.thenitro.ngine.pool.Pool;
+	import ngine.collections.grid.interfaces.IGridGenerator;
+	import ngine.collections.grid.interfaces.IGridObject;
+	import ngine.display.gridcontainer.GridContainer;
+	import ngine.display.gridcontainer.animation.GridAnimator;
+	import ngine.display.gridcontainer.interfaces.IGridContainer;
+	import ngine.display.gridcontainer.interfaces.IVisualGridObject;
+	import ngine.math.GraphUtils;
+	import ngine.pool.Pool;
 	
 	import starling.animation.Tween;
 	import starling.core.Starling;
