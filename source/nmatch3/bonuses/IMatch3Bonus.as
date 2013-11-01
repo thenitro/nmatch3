@@ -1,5 +1,5 @@
-package com.thenitro.ngine.match3.bonuses {
-	import com.thenitro.ngine.match3.Match3Logic;
+package nmatch3.bonuses {
+	import nmatch3.Match3Logic;
 	
 	import ngine.display.gridcontainer.interfaces.IGridContainer;
 	import ngine.pool.IReusable;

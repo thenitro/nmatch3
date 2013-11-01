@@ -1,6 +1,6 @@
-package com.thenitro.ngine.match3.controllers {
-	import com.thenitro.ngine.grid.GridContainer;
-	import com.thenitro.ngine.grid.interfaces.IGridObject;
+package nmatch3.controllers {
+	import ngine.collections.grid.interfaces.IGridObject;
+	import ngine.display.gridcontainer.GridContainer;
 	
 	import starling.events.EventDispatcher;
 	import starling.events.Touch;
@@ -55,7 +55,6 @@ package com.thenitro.ngine.match3.controllers {
 			if (touch) {
 				if (touch.phase == TouchPhase.BEGAN) {
 					_start       = touch.target.parent as IGridObject;
-					_start.alpha = 0.5;
 					
 					dispatchEventWith(START_PICKED, false, _start);
 				}

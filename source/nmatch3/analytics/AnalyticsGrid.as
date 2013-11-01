@@ -1,4 +1,4 @@
-package com.thenitro.ngine.match3.analytics {
+package nmatch3.analytics {
 	import com.thenitro.ngine.grid.Grid;
 	import com.thenitro.ngine.grid.interfaces.IGridContainer;
 	

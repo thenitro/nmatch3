@@ -1,8 +1,10 @@
-package com.thenitro.ngine.match3.generators {
-	import com.thenitro.ngine.grid.interfaces.IGridContainer;
-	import com.thenitro.ngine.grid.interfaces.IGridGenerator;
-	import com.thenitro.ngine.grid.interfaces.IGridObject;
-	import com.thenitro.ngine.math.GraphUtils;
+package nmatch3.generators {
+	import com.thenitro.match3sample.items.Cell;
+	
+	import ngine.collections.grid.interfaces.IGridGenerator;
+	import ngine.collections.grid.interfaces.IGridObject;
+	import ngine.display.gridcontainer.interfaces.IGridContainer;
+	import ngine.math.GraphUtils;
 	
 	public final class BFSGenerator implements IGridGenerator {
 		private var _waveSize:uint;
@@ -43,7 +45,8 @@ package com.thenitro.ngine.match3.generators {
 			
 			pGrid.add(pI, pJ, item);
 			
-			while (GraphUtils.bfs(pI, pJ, pGrid).length >= _waveSize - _playerSkill) {
+			while (GraphUtils.bfs(pI, pJ, pGrid, 
+				   GraphUtils.addNeighborsVerticalHorizintal).length >= _waveSize - _playerSkill) {
 				item = generateItem(pElements, pCellWidth, pCellHeight);
 				
 				pGrid.add(pI, pJ, item);

@@ -1,4 +1,4 @@
-package com.thenitro.ngine.match3 {
+package nmatch3 {
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 	import flash.utils.getTimer;

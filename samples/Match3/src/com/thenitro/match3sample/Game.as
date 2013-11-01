@@ -4,12 +4,13 @@ package com.thenitro.match3sample {
 	import com.thenitro.match3sample.items.Green;
 	import com.thenitro.match3sample.items.Red;
 	import com.thenitro.match3sample.items.Yellow;
-	import com.thenitro.ngine.grid.GridContainer;
-	import com.thenitro.ngine.grid.animation.TweenGridAnimator;
-	import com.thenitro.ngine.grid.interfaces.IGridObject;
-	import com.thenitro.ngine.match3.Match3Logic;
-	import com.thenitro.ngine.match3.controllers.Controller;
-	import com.thenitro.ngine.match3.generators.BFSGenerator;
+	import nmatch3.Match3Logic;
+	import nmatch3.controllers.Controller;
+	import nmatch3.generators.BFSGenerator;
+	
+	import ngine.collections.grid.interfaces.IGridObject;
+	import ngine.display.gridcontainer.GridContainer;
+	import ngine.display.gridcontainer.animation.TweenGridAnimator;
 	
 	import starling.display.Sprite;
 	import starling.events.Event;

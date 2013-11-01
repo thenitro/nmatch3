@@ -1,12 +1,13 @@
 package com.thenitro.match3sample.items {
-	import com.thenitro.ngine.grid.interfaces.IGridObject;
-	
 	import flash.errors.IllegalOperationError;
+	
+	import ngine.collections.grid.interfaces.IGridObject;
+	import ngine.display.gridcontainer.interfaces.IVisualGridObject;
 	
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	
-	public class Cell extends Sprite implements IGridObject {
+	public class Cell extends Sprite implements IGridObject, IVisualGridObject {
 		private var _indexX:uint;
 		private var _indexY:uint;
 		

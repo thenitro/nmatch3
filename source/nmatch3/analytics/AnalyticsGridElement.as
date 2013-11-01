@@ -1,4 +1,4 @@
-package com.thenitro.ngine.match3.analytics {
+package nmatch3.analytics {
 	import ngine.collections.grid.interfaces.IGridObject;
 	import ngine.display.gridcontainer.interfaces.IVisualGridObject;
 	import ngine.pool.IReusable;
