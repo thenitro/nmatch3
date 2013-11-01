@@ -1,14 +1,13 @@
 package com.thenitro.ngine.match3 {
-	import com.thenitro.ngine.grid.interfaces.IGridContainer;
-	import com.thenitro.ngine.grid.interfaces.IGridObject;
-	import com.thenitro.ngine.math.GraphUtils;
-	import com.thenitro.ngine.pool.Pool;
-	
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 	import flash.utils.getTimer;
 	
-	import starling.events.Event;
+	import ngine.collections.grid.interfaces.IGridObject;
+	import ngine.display.gridcontainer.interfaces.IGridContainer;
+	import ngine.math.GraphUtils;
+	import ngine.pool.Pool;
+	
 	import starling.events.EventDispatcher;
 	
 	public class Match3Analytics extends EventDispatcher {
@@ -58,9 +57,14 @@ package com.thenitro.ngine.match3 {
 		public final function calculatePlayerSkill(pRemovedMobs:uint):Number {
 			pRemovedMobs = pRemovedMobs ? pRemovedMobs : 1;
 			
-			var turnsDelta:Number   = Math.abs(_prevTurns - _currTurns ? _prevTurns - _currTurns : 1);
-			var turnsToThink:Number = turnsDelta / (_thinkTime / 1000);
-			var waveDelta:Number    = pRemovedMobs / _waveDepth;
+			var turnsDelta:Number   = Math.abs(_prevTurns - _currTurns ? _prevTurns - _currTurns : 1); //turns 
+			var turnsToThink:Number = turnsDelta / (_thinkTime / 1000); //time
+			var waveDelta:Number    = pRemovedMobs / _waveDepth; //combinations
+			
+			trace("Match3Analytics.calculatePlayerSkill(pRemovedMobs): " + turnsDelta);
+			trace("Match3Analytics.calculatePlayerSkill(pRemovedMobs): " + turnsToThink);
+			trace("Match3Analytics.calculatePlayerSkill(pRemovedMobs): " + waveDelta);
+			trace("Match3Analytics.calculatePlayerSkill(pRemovedMobs): " + (turnsToThink  * waveDelta));
 			
 			return turnsToThink * waveDelta;
 		};
@@ -70,7 +74,7 @@ package com.thenitro.ngine.match3 {
 				return EMPTY_ARRAY;
 			}
 			
-			return GraphUtils.bfs(pElement.indexX, pElement.indexY, pGrid);
+			return GraphUtils.bfs(pElement.indexX, pElement.indexY, pGrid, GraphUtils.addNeighborsVerticalHorizintal);
 		};
 		
 		public final function start():void {

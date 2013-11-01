@@ -1,5 +1,4 @@
 package com.thenitro.ngine.match3.generators {
-	import com.thenitro.match3sample.items.Cell;
 	import com.thenitro.ngine.grid.interfaces.IGridContainer;
 	import com.thenitro.ngine.grid.interfaces.IGridGenerator;
 	import com.thenitro.ngine.grid.interfaces.IGridObject;

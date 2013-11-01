@@ -1,9 +1,11 @@
 package com.thenitro.ngine.match3.analytics {
-	import com.thenitro.ngine.grid.interfaces.IGridObject;
-	import com.thenitro.ngine.pool.IReusable;
-	import com.thenitro.ngine.pool.Pool;
+	import ngine.collections.grid.interfaces.IGridObject;
+	import ngine.display.gridcontainer.interfaces.IVisualGridObject;
+	import ngine.pool.IReusable;
+	import ngine.pool.Pool;
 	
-	public class AnalyticsGridElement implements IGridObject, IReusable {
+	
+	public class AnalyticsGridElement implements IGridObject, IVisualGridObject, IReusable {
 		private static var _pool:Pool = Pool.getInstance();
 		
 		private var _indexX:uint;

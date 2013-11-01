@@ -1,11 +1,9 @@
 package com.thenitro.ngine.match3.bonuses {
-	import com.thenitro.monsterinarow.global.monsters.Monster;
-	import com.thenitro.ngine.grid.Grid;
-	import com.thenitro.ngine.grid.interfaces.IGridContainer;
-	import com.thenitro.ngine.grid.interfaces.IGridObject;
 	import com.thenitro.ngine.match3.Match3Logic;
 	
 	import flash.errors.IllegalOperationError;
+	
+	import ngine.display.gridcontainer.interfaces.IGridContainer;
 	
 	import starling.events.EventDispatcher;
 	
