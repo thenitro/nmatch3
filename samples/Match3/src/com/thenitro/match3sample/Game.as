@@ -4,13 +4,15 @@ package com.thenitro.match3sample {
 	import com.thenitro.match3sample.items.Green;
 	import com.thenitro.match3sample.items.Red;
 	import com.thenitro.match3sample.items.Yellow;
+	
+	import ndatas.grid.IGridObject;
+	
+	import ngine.display.gridcontainer.GridContainer;
+	import ngine.display.gridcontainer.animation.TweenGridAnimator;
+	
 	import nmatch3.Match3Logic;
 	import nmatch3.controllers.Controller;
 	import nmatch3.generators.BFSGenerator;
-	
-	import ngine.collections.grid.interfaces.IGridObject;
-	import ngine.display.gridcontainer.GridContainer;
-	import ngine.display.gridcontainer.animation.TweenGridAnimator;
 	
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -117,7 +119,7 @@ package com.thenitro.match3sample {
 		};
 		
 		private function findItem():void {
-			var item:IGridObject = _selected[_index];	
+			var item:IGridObject = _selected[_index] as IGridObject;	
 			
 			_logic.addEventListener(Match3Logic.ITEM_FINDED, itemFindedEventHandler);
 			_logic.findItem(item.indexX, item.indexY, _grid, WAVE_DEPTH);

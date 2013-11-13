@@ -1,12 +1,15 @@
 package nmatch3 {
-	import ngine.collections.grid.interfaces.IGridGenerator;
-	import ngine.collections.grid.interfaces.IGridObject;
+	import ndatas.grid.IGridObject;
+	
 	import ngine.display.gridcontainer.GridContainer;
 	import ngine.display.gridcontainer.animation.GridAnimator;
 	import ngine.display.gridcontainer.interfaces.IGridContainer;
 	import ngine.display.gridcontainer.interfaces.IVisualGridObject;
 	import ngine.math.GraphUtils;
-	import ngine.pool.Pool;
+	
+	import nmatch3.generators.BFSGenerator;
+	
+	import npooling.Pool;
 	
 	import starling.animation.Tween;
 	import starling.core.Starling;
@@ -35,7 +38,7 @@ package nmatch3 {
 		protected static var _pool:Pool = Pool.getInstance();
 		
 		protected var _animator:GridAnimator;
-		protected var _generator:IGridGenerator;
+		protected var _generator:BFSGenerator;
 		
 		protected var _cellWidth:uint;
 		protected var _cellHeight:uint;		
@@ -88,7 +91,7 @@ package nmatch3 {
 		};
 		
 		public function init(pCellWidth:uint, pCellHeight:uint, 
-							 pGenerator:IGridGenerator, pAnimator:GridAnimator):void {
+							 pGenerator:BFSGenerator, pAnimator:GridAnimator):void {
 			_cellWidth  = pCellWidth;
 			_cellHeight = pCellHeight;
 			
@@ -162,8 +165,8 @@ package nmatch3 {
 			var animate:Boolean;
 			
 			for (var i:int = pY; i > 0; i--) {
-				var objectA:IGridObject = pGrid.take(pX, i); 
-				var objectB:IGridObject = pGrid.take(pX, i - 1); 
+				var objectA:IGridObject = pGrid.take(pX, i) as IGridObject; 
+				var objectB:IGridObject = pGrid.take(pX, i - 1) as IGridObject; 
 				
 				pGrid.swap(pX, i, pX, i - 1);
 				
@@ -183,12 +186,12 @@ package nmatch3 {
 			
 			Starling.juggler.add(tween);
 			
-			pGrid.addVisual(pGrid.add(pIndexX, 0, newGem));
+			pGrid.addVisual(pGrid.add(pIndexX, 0, newGem) as IGridObject);
 		};
 		
 		public function swap(pAX:uint, pAY:uint, pBX:uint, pBY:uint, pGrid:IGridContainer):void {
-			var objectA:IGridObject = pGrid.take(pAX, pAY); 
-			var objectB:IGridObject = pGrid.take(pBX, pBY); 
+			var objectA:IGridObject = pGrid.take(pAX, pAY) as IGridObject; 
+			var objectB:IGridObject = pGrid.take(pBX, pBY) as IGridObject; 
 			
 			pGrid.swap(pAX, pAY, pBX, pBY);
 			

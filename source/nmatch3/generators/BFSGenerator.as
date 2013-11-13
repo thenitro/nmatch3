@@ -1,12 +1,12 @@
 package nmatch3.generators {
 	import com.thenitro.match3sample.items.Cell;
 	
-	import ngine.collections.grid.interfaces.IGridGenerator;
-	import ngine.collections.grid.interfaces.IGridObject;
+	import ndatas.grid.IGridObject;
+	
 	import ngine.display.gridcontainer.interfaces.IGridContainer;
 	import ngine.math.GraphUtils;
 	
-	public final class BFSGenerator implements IGridGenerator {
+	public final class BFSGenerator {
 		private var _waveSize:uint;
 		private var _playerSkill:uint;
 		

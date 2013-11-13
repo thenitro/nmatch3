@@ -1,7 +1,8 @@
 package com.thenitro.match3sample.items {
 	import flash.errors.IllegalOperationError;
 	
-	import ngine.collections.grid.interfaces.IGridObject;
+	import ndatas.grid.IGridObject;
+	
 	import ngine.display.gridcontainer.interfaces.IVisualGridObject;
 	
 	import starling.display.Quad;

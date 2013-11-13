@@ -1,5 +1,6 @@
 package nmatch3.controllers {
-	import ngine.collections.grid.interfaces.IGridObject;
+	import ndatas.grid.IGridObject;
+	
 	import ngine.display.gridcontainer.GridContainer;
 	
 	import starling.events.EventDispatcher;
@@ -93,7 +94,7 @@ package nmatch3.controllers {
 			}
 			
 			var item:IGridObject = _container.take(_start.indexX - signDx, 
-												   _start.indexY - signDy);
+												   _start.indexY - signDy) as IGridObject;
 			
 			if (!item) {
 				return;

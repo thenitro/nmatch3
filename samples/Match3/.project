@@ -16,6 +16,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>[source path] ndatas-source</name>
+			<type>2</type>
+			<location>E:/ndatas/source</location>
+		</link>
+		<link>
 			<name>[source path] ngine-source</name>
 			<type>2</type>
 			<location>E:/ngine/source</location>
@@ -24,6 +29,11 @@
 			<name>[source path] nmatch3-source</name>
 			<type>2</type>
 			<location>E:/nmatch3/source</location>
+		</link>
+		<link>
+			<name>[source path] npooling-source</name>
+			<type>2</type>
+			<location>E:/npooling/source</location>
 		</link>
 	</linkedResources>
 </projectDescription>
