@@ -3,10 +3,12 @@ package nmatch3 {
 	import flash.utils.Timer;
 	import flash.utils.getTimer;
 	
-	import ngine.collections.grid.interfaces.IGridObject;
+	import ndatas.grid.IGridObject;
+	
 	import ngine.display.gridcontainer.interfaces.IGridContainer;
 	import ngine.math.GraphUtils;
-	import ngine.pool.Pool;
+	
+	import npooling.Pool;
 	
 	import starling.events.EventDispatcher;
 	
@@ -50,7 +52,8 @@ package nmatch3 {
 			_waveDepth = pValue;
 		};
 		
-		public function findPossibleMoves(pGrid:IGridContainer, pNextObject:IGridObject = null):void {
+		public function findPossibleMoves(pGrid:IGridContainer, 
+										  pNextObject:IGridObject = null):void {
 			
 		};
 		

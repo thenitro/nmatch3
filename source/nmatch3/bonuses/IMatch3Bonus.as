@@ -1,8 +1,9 @@
 package nmatch3.bonuses {
+	import ngine.display.gridcontainer.interfaces.IGridContainer;
+	
 	import nmatch3.Match3Logic;
 	
-	import ngine.display.gridcontainer.interfaces.IGridContainer;
-	import ngine.pool.IReusable;
+	import npooling.IReusable;
 	
 	public interface IMatch3Bonus extends IReusable {
 		function execute():void;

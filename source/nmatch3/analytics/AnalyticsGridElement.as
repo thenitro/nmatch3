@@ -1,9 +1,10 @@
 package nmatch3.analytics {
-	import ngine.collections.grid.interfaces.IGridObject;
-	import ngine.display.gridcontainer.interfaces.IVisualGridObject;
-	import ngine.pool.IReusable;
-	import ngine.pool.Pool;
+	import ndatas.grid.IGridObject;
 	
+	import ngine.display.gridcontainer.interfaces.IVisualGridObject;
+	
+	import npooling.IReusable;
+	import npooling.Pool;
 	
 	public class AnalyticsGridElement implements IGridObject, IVisualGridObject, IReusable {
 		private static var _pool:Pool = Pool.getInstance();
