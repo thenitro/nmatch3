@@ -3,7 +3,7 @@ package nmatch3 {
 	import flash.utils.Timer;
 	import flash.utils.getTimer;
 	
-	import ndatas.grid.IGridObject;
+	import ncollections.grid.IGridObject;
 	
 	import ngine.display.gridcontainer.interfaces.IGridContainer;
 	import ngine.math.GraphUtils;

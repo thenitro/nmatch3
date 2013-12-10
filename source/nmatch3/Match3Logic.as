@@ -1,7 +1,7 @@
 package nmatch3 {
 	import com.thenitro.monsterinarow.global.generator.BFSGenerator;
 	
-	import ndatas.grid.IGridObject;
+	import ncollections.grid.IGridObject;
 	
 	import ngine.display.gridcontainer.GridContainer;
 	import ngine.display.gridcontainer.animation.GridAnimator;
