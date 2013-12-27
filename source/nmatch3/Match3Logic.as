@@ -1,6 +1,7 @@
 package nmatch3 {
 	import com.thenitro.monsterinarow.global.generator.BFSGenerator;
 	
+	import ncollections.grid.Grid;
 	import ncollections.grid.IGridObject;
 	
 	import ngine.display.gridcontainer.GridContainer;
@@ -51,7 +52,7 @@ package nmatch3 {
 		private var _rowIndex:uint;
 		private var _depth:uint;
 		
-		private var _grid:IGridContainer;
+		private var _grid:Grid;
 		
 		private var _types:Vector.<Class>;
 		private var _availableTypes:Vector.<Class>;
@@ -96,7 +97,7 @@ package nmatch3 {
 			_animator   = pAnimator;
 		};
 		
-		public function findGrid(pGrid:IGridContainer, pDepth:uint):void {
+		public function findGrid(pGrid:Grid, pDepth:uint):void {
 			_rowIndex = 0;
 			_grid     = pGrid;
 			_depth    = pDepth;
@@ -104,7 +105,7 @@ package nmatch3 {
 			nextSample();
 		};
 		
-		public function findRow(pRow:uint, pGrid:IGridContainer, pDepth:uint):void {
+		public function findRow(pRow:uint, pGrid:Grid, pDepth:uint):void {
 			_colIndex = 0;
 			_rowIndex = pRow;
 			_grid     = pGrid;
@@ -113,7 +114,7 @@ package nmatch3 {
 			nextItem();
 		};
 		
-		public function findItem(pX:uint, pY:uint, pGrid:IGridContainer, pDepth:uint):Boolean {
+		public function findItem(pX:uint, pY:uint, pGrid:Grid, pDepth:uint):Boolean {
 			var samples:Array = GraphUtils.bfs(pX, pY, pGrid, GraphUtils.addNeighborsVerticalHorizintal);
 			
 			if (samples.length >= pDepth) {
@@ -138,13 +139,12 @@ package nmatch3 {
 			return false;
 		};
 		
-		public function removeItem(pItem:IGridObject, pGrid:IGridContainer):void {			
+		public function removeItem(pItem:IGridObject, pGrid:Grid):void {			
 			if (!pItem) {
 				return;
 			}
 			
 			pGrid.remove(pItem.indexX, pItem.indexY);
-			pGrid.removeVisual(pItem);
 			
 			_animator.remove(pItem);
 			
@@ -158,7 +158,7 @@ package nmatch3 {
 			flood(pItem.indexX, pItem.indexY, pGrid);
 		};
 		
-		public function pushTop(pX:uint, pY:uint, pGrid:IGridContainer):void {
+		public function pushTop(pX:uint, pY:uint, pGrid:Grid):void {
 			var animate:Boolean;
 			
 			for (var i:int = pY; i > 0; i--) {
@@ -207,7 +207,7 @@ package nmatch3 {
 			_itemsRemoved = 0;		
 		};
 		
-		private function flood(pIndexX:uint, pIndexY:uint, pGrid:IGridContainer):void {
+		private function flood(pIndexX:uint, pIndexY:uint, pGrid:Grid):void {
 			pushTop(pIndexX, pIndexY, pGrid);
 			dispatchEventWith(FLOOD_EVENT, false, { indexX: pIndexX, indexY: pIndexY });
 		};
