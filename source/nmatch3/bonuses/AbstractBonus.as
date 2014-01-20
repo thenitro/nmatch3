@@ -1,16 +1,16 @@
 package nmatch3.bonuses {
-	import nmatch3.Match3Logic;
-	
 	import flash.errors.IllegalOperationError;
 	
-	import ngine.display.gridcontainer.interfaces.IGridContainer;
+	import ncollections.grid.Grid;
+	
+	import nmatch3.Match3Logic;
 	
 	import starling.events.EventDispatcher;
 	
 	public class AbstractBonus extends EventDispatcher implements IMatch3Bonus {
 		public static const COMPLETED:String = 'complete';
 		
-		protected var _grid:IGridContainer;
+		protected var _grid:Grid;
 		protected var _logic:Match3Logic;
 		
 		protected var _x:uint;
@@ -27,7 +27,7 @@ package nmatch3.bonuses {
 			return null;
 		};
 		
-		public function init(pGrid:IGridContainer, pLogic:Match3Logic, pDepth:uint):void {
+		public function init(pGrid:Grid, pLogic:Match3Logic, pDepth:uint):void {
 			_grid  = pGrid;
 			_logic = pLogic;
 			

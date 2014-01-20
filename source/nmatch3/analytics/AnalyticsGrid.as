@@ -1,14 +1,16 @@
 package nmatch3.analytics {
-	import com.thenitro.ngine.grid.Grid;
-	import com.thenitro.ngine.grid.interfaces.IGridContainer;
+	import ncollections.MatrixMxN;
+	import ncollections.grid.Grid;
+	
+	import ngine.display.gridcontainer.interfaces.IGridContainer;
 	
 	public class AnalyticsGrid extends Grid {
 		
 		public function AnalyticsGrid() {
-			super(0, 0);
+			super();
 		};
 		
-		override public function clone():IGridContainer {
+		override public function clone():MatrixMxN {
 			var grid:AnalyticsGrid = _pool.get(AnalyticsGrid) as AnalyticsGrid;
 			
 			if (!grid) {

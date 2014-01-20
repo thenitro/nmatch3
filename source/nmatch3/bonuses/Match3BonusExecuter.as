@@ -1,7 +1,9 @@
 package nmatch3.bonuses {
-	import nmatch3.Match3Logic;
+	import ncollections.grid.Grid;
 	
 	import ngine.display.gridcontainer.interfaces.IGridContainer;
+	
+	import nmatch3.Match3Logic;
 	
 	import starling.events.Event;
 	import starling.events.EventDispatcher;
@@ -9,7 +11,7 @@ package nmatch3.bonuses {
 	public final class Match3BonusExecuter extends EventDispatcher implements IMatch3BonusExecuter {
 		public static const BONUS_EXECUTED:String = 'bonus_executed';
 		
-		private var _grid:IGridContainer;
+		private var _grid:Grid;
 		private var _logic:Match3Logic;
 		
 		private var _depth:uint;
@@ -18,7 +20,7 @@ package nmatch3.bonuses {
 			super();
 		};
 		
-		public function init(pGrid:IGridContainer, pLogic:Match3Logic, pDepth:uint):void {
+		public function init(pGrid:Grid, pLogic:Match3Logic, pDepth:uint):void {
 			_grid  = pGrid;
 			_logic = pLogic;
 			

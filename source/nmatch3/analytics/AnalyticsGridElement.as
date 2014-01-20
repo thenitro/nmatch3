@@ -1,15 +1,16 @@
 package nmatch3.analytics {
-	import ngine.collections.grid.interfaces.IGridObject;
-	import ngine.display.gridcontainer.interfaces.IVisualGridObject;
-	import ngine.pool.IReusable;
-	import ngine.pool.Pool;
+	import ncollections.grid.IGridObject;
 	
+	import ngine.display.gridcontainer.interfaces.IVisualGridObject;
+	
+	import npooling.IReusable;
+	import npooling.Pool;
 	
 	public class AnalyticsGridElement implements IGridObject, IVisualGridObject, IReusable {
 		private static var _pool:Pool = Pool.getInstance();
 		
-		private var _indexX:uint;
-		private var _indexY:uint;
+		private var _indexX:int;
+		private var _indexY:int;
 		
 		private var _reflection:Class;
 		
@@ -29,11 +30,11 @@ package nmatch3.analytics {
 		
 		public function set y(pValue:Number):void {};
 		
-		public function get indexX():uint {
+		public function get indexX():int {
 			return _indexX;
 		};
 		
-		public function get indexY():uint {
+		public function get indexY():int {
 			return _indexY;
 		};
 		
@@ -49,7 +50,7 @@ package nmatch3.analytics {
 			_reflection = pClass;
 		};
 		
-		public function updateIndex(pX:uint, pY:uint):void {
+		public function updateIndex(pX:int, pY:int):void {
 			_indexX = pX;
 			_indexY = pY;
 		};
