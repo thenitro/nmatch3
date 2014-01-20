@@ -31,7 +31,6 @@ package nmatch3.generators {
 									 pCellWidth:Number, pCellHeight:Number):void {
 			for (var i:uint = 0; i < pEndX; i++) {
 				for (var j:uint = 0; j < pEndY; j++) {
-					trace("BFSGenerator.generateGrid(pGrid, pElements, pEndX, pEndY, pCellWidth, pCellHeight)");
 					generateOne(i, j, pGrid, pElements, pCellWidth, pCellHeight);
 				}
 			}
@@ -49,6 +48,7 @@ package nmatch3.generators {
 				   GraphUtils.addNeighborsVerticalHorizintal).length >= _waveSize - _playerSkill) {
 				item = generateItem(pElements, pCellWidth, pCellHeight);
 				
+				pGrid.remove(pI, pJ);
 				pGrid.add(pI, pJ, item);
 			}
 						
@@ -59,8 +59,6 @@ package nmatch3.generators {
 									  pCellWidth:Number, pCellHeight:Number):IGridObject {
 			var index:uint = Math.floor(pElements.length * Math.random());
 			var Type:Class = pElements[index];
-			
-			trace("BFSGenerator.generateItem(pElements, pCellWidth, pCellHeight)", Type);
 			
 			return new Type(pCellWidth, pCellHeight);
 		};

@@ -1,5 +1,5 @@
 package nmatch3.controllers {
-	import ndatas.grid.IGridObject;
+	import ncollections.grid.IGridObject;
 	
 	import ngine.display.gridcontainer.GridContainer;
 	

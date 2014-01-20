@@ -38,6 +38,8 @@ package nmatch3 {
 		
 		protected static var _pool:Pool = Pool.getInstance();
 		
+		public var availableTypes:Array;
+		
 		protected var _animator:GridAnimator;
 		protected var _generator:BFSGenerator;
 		
@@ -54,21 +56,14 @@ package nmatch3 {
 		
 		private var _grid:Grid;
 		
-		private var _types:Vector.<Class>;
-		private var _availableTypes:Vector.<Class>;
+		private var _itemsCollector:Function;
 		
-		public function Match3Logic(pTypes:Vector.<Class>) {
-			_types = pTypes;
-			
+		public function Match3Logic() {
 			super();
 		};
 		
 		public function get removed():uint {
 			return _itemsRemoved;
-		};
-		
-		public function get availableMonsters():Vector.<Class> {
-			return _availableTypes;
 		};
 		
 		public function get animator():GridAnimator {
@@ -82,11 +77,6 @@ package nmatch3 {
 		public function get turns():int {
 			return -1;
 		};
-
-		public function set itemsNum(pValue:uint):void {
-			_availableTypes = _types.slice(0, pValue);
-			_itemsNum       = pValue;
-		};
 		
 		public function init(pCellWidth:uint, pCellHeight:uint, 
 							 pGenerator:BFSGenerator, pAnimator:GridAnimator):void {
@@ -97,25 +87,29 @@ package nmatch3 {
 			_animator   = pAnimator;
 		};
 		
-		public function findGrid(pGrid:Grid, pDepth:uint):void {
+		public function findGrid(pGrid:Grid, pDepth:uint, pItemsCollector:Function):void {
 			_rowIndex = 0;
 			_grid     = pGrid;
 			_depth    = pDepth;
 			
+			_itemsCollector = pItemsCollector; 
+			
 			nextSample();
 		};
 		
-		public function findRow(pRow:uint, pGrid:Grid, pDepth:uint):void {
+		public function findRow(pRow:uint, pGrid:Grid, pDepth:uint, pItemsCollector:Function):void {
 			_colIndex = 0;
 			_rowIndex = pRow;
 			_grid     = pGrid;
 			_depth    = pDepth;
 			
+			_itemsCollector = pItemsCollector; 
+			
 			nextItem();
 		};
 		
-		public function findItem(pX:uint, pY:uint, pGrid:Grid, pDepth:uint):Boolean {
-			var samples:Array = GraphUtils.bfs(pX, pY, pGrid, GraphUtils.addNeighborsVerticalHorizintal);
+		public function findItem(pX:uint, pY:uint, pGrid:Grid, pDepth:uint, pCollector:Function):Boolean {
+			var samples:Array = pCollector(pX, pY, pGrid) as Array;
 			
 			if (samples.length >= pDepth) {
 				for each (var item:IGridObject in samples) {					
@@ -174,7 +168,7 @@ package nmatch3 {
 		
 		public function dropNew(pIndexX:uint, pIndexY:uint, pGrid:GridContainer):void {
 			var newGem:IVisualGridObject = _generator.generateOne(pIndexX, 0, pGrid, 
-																  _availableTypes, _cellWidth, _cellHeight) as IVisualGridObject;
+																  availableTypes, _cellWidth, _cellHeight) as IVisualGridObject;
 				newGem.alpha = 0.0;
 			
 			var tween:Tween = new Tween(newGem, ANIMATION_TIME);
@@ -227,7 +221,7 @@ package nmatch3 {
 		
 		private function nextSample():void {
 			addEventListener(ROW_FINDED, updateRowIndex);
-			findRow(_rowIndex, _grid, _depth);
+			findRow(_rowIndex, _grid, _depth, _itemsCollector);
 		};
 		
 		private function updateColIndex(pEvent:Event):void {
@@ -244,7 +238,7 @@ package nmatch3 {
 		
 		private function nextItem():void {
 			addEventListener(ITEM_FINDED, updateColIndex);
-			findItem(_colIndex, _rowIndex, _grid, _depth);
+			findItem(_colIndex, _rowIndex, _grid, _depth, _itemsCollector);
 		};
 		
 		private function itemFindedEventHandler(pEvent:Event):void {
