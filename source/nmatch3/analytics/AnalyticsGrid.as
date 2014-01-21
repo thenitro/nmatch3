@@ -4,11 +4,20 @@ package nmatch3.analytics {
 	
 	import ngine.display.gridcontainer.interfaces.IGridContainer;
 	
-	public class AnalyticsGrid extends Grid {
+	public class AnalyticsGrid extends Grid implements IGridContainer {
 		
 		public function AnalyticsGrid() {
 			super();
 		};
+		
+		public function get cellWidth():Number { return 0; };
+		public function get cellHeight():Number { return 0; };
+		
+		public function addVisual(pObject:Object, pUpdatePosition:Boolean = false):void {};
+		public function removeVisual(pObject:Object):void {};
+		
+		public function update():void {};
+		public function updateIndexes():void {};
 		
 		override public function clone():MatrixMxN {
 			var grid:AnalyticsGrid = _pool.get(AnalyticsGrid) as AnalyticsGrid;

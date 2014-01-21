@@ -5,7 +5,7 @@ package nmatch3.generators {
 	import ngine.display.gridcontainer.interfaces.IGridContainer;
 	import ngine.math.GraphUtils;
 	
-	public final class BFSGenerator {
+	public final class BFSGenerator implements IGenerator {
 		private var _waveSize:uint;
 		private var _playerSkill:uint;
 		

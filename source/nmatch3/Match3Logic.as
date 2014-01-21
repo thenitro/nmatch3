@@ -9,6 +9,7 @@ package nmatch3 {
 	import ngine.math.GraphUtils;
 	
 	import nmatch3.generators.BFSGenerator;
+	import nmatch3.generators.IGenerator;
 	
 	import npooling.Pool;
 	
@@ -41,12 +42,10 @@ package nmatch3 {
 		public var availableTypes:Array;
 		
 		protected var _animator:GridAnimator;
-		protected var _generator:BFSGenerator;
+		protected var _generator:IGenerator;
 		
 		protected var _cellWidth:uint;
 		protected var _cellHeight:uint;		
-		
-		private var _itemsNum:uint;
 		
 		private var _itemsRemoved:uint = 0;
 		
@@ -70,16 +69,12 @@ package nmatch3 {
 			return _animator;
 		};
 		
-		public function get itemsNum():uint {
-			return _itemsNum;
-		};
-		
 		public function get turns():int {
 			return -1;
 		};
 		
 		public function init(pCellWidth:uint, pCellHeight:uint, 
-							 pGenerator:BFSGenerator, pAnimator:GridAnimator):void {
+							 pGenerator:IGenerator, pAnimator:GridAnimator):void {
 			_cellWidth  = pCellWidth;
 			_cellHeight = pCellHeight;
 			
