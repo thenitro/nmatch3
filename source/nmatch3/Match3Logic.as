@@ -106,12 +106,12 @@ package nmatch3 {
 		public function findItem(pX:uint, pY:uint, pGrid:Grid, pDepth:uint, pCollector:Function):Boolean {
 			var samples:Array = pCollector(pX, pY, pGrid) as Array;
 			
-			if (samples.length >= pDepth) {
+			if (samples.length >= pDepth) {	
+				dispatchEventWith(MATCH_FINDED, false, samples);
+				
 				for each (var item:IGridObject in samples) {					
 					removeItem(item, pGrid);
 				}
-				
-				dispatchEventWith(MATCH_FINDED, false, samples);
 				
 				for each (item in samples) {
 					_pool.put(item);
@@ -136,7 +136,6 @@ package nmatch3 {
 			pGrid.remove(pItem.indexX, pItem.indexY);
 			
 			_animator.remove(pItem);
-			
 			_itemsRemoved++;
 			
 			dispatchEventWith(ITEM_REMOVED, false, { 
@@ -161,18 +160,22 @@ package nmatch3 {
 			}
 		};
 		
-		public function dropNew(pIndexX:uint, pIndexY:uint, pGrid:GridContainer):void {
-			var newGem:IVisualGridObject = _generator.generateOne(pIndexX, 0, pGrid, 
-																  availableTypes, _cellWidth, _cellHeight) as IVisualGridObject;
-				newGem.alpha = 0.0;
+		public function dropNew(pIndexX:uint, pIndexY:uint, pGrid:GridContainer, 
+								pObject:IVisualGridObject = null):void {
+			if (!pObject) {
+				pObject = _generator.generateOne(pIndexX, 0, pGrid, 
+												 availableTypes, _cellWidth, _cellHeight) as IVisualGridObject;
+			}
 			
-			var tween:Tween = new Tween(newGem, ANIMATION_TIME);
+			pObject.alpha = 0.0;
+			
+			var tween:Tween = new Tween(pObject, ANIMATION_TIME);
 				tween.delay = FLOOD_DELAY * 1.5;
 				tween.animate('alpha', 1.0);
 			
 			Starling.juggler.add(tween);
 			
-			pGrid.addVisual(pGrid.add(pIndexX, 0, newGem) as IGridObject);
+			pGrid.addVisual(pGrid.add(pIndexX, 0, pObject) as IGridObject);
 		};
 		
 		public function swap(pAX:uint, pAY:uint, pBX:uint, pBY:uint, pGrid:IGridContainer):void {
@@ -197,7 +200,6 @@ package nmatch3 {
 		};
 		
 		private function flood(pIndexX:uint, pIndexY:uint, pGrid:Grid):void {
-			pushTop(pIndexX, pIndexY, pGrid);
 			dispatchEventWith(FLOOD_EVENT, false, { indexX: pIndexX, indexY: pIndexY });
 		};
 		
