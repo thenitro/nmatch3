@@ -58,7 +58,7 @@ package nmatch3.generators {
 		private function generateItem(pElements:Array,
 									  pCellWidth:Number, pCellHeight:Number):IGridObject {
 			var index:uint = Math.floor(pElements.length * Math.random());
-			var Type:Class = pElements[index];
+			var Type:Class = pElements[index];			
 			
 			return new Type(pCellWidth, pCellHeight);
 		};
