@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <actionScriptProperties analytics="false" mainApplicationPath="NMatch3Sample.as" projectUUID="bc9488d6-df35-471d-af82-ef41f2732429" version="10">
-  <compiler additionalCompilerArguments="-locale en_US" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" removeUnusedRSL="true" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
+  <compiler additionalCompilerArguments="-locale en_US -swf-version=21 -define=CONFIG::DEBUG,true -define=CONFIG::RELEASE,false -define=CONFIG::MOBILE,false -define=CONFIG::WEB,true" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" removeUnusedRSL="true" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
     <compilerSourcePath>
-      <compilerSourcePathEntry kind="1" linkType="1" path="E:/ngine/source"/>
-      <compilerSourcePathEntry kind="1" linkType="1" path="E:/nmatch3/source"/>
-      <compilerSourcePathEntry kind="1" linkType="1" path="E:/ndatas/source"/>
-      <compilerSourcePathEntry kind="1" linkType="1" path="E:/npooling/source"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="D:/ngine/source"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="D:/nmatch3/source"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="D:/ncollections/source"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="D:/npooling/source"/>
     </compilerSourcePath>
     <libraryPath defaultLinkType="0">
       <libraryPathEntry kind="4" path="">
@@ -33,7 +33,7 @@
           <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/automation_agent.swc" useDefaultLinkType="false"/>
         </excludedEntries>
       </libraryPathEntry>
-      <libraryPathEntry kind="3" linkType="1" path="E:/libs/Starling-Framework/starling/bin/starling.swc" useDefaultLinkType="false"/>
+      <libraryPathEntry kind="3" linkType="1" path="D:/libs/Starling-Framework/starling/bin/starling.swc" useDefaultLinkType="false"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>

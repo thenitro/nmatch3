@@ -5,10 +5,12 @@ package com.thenitro.match3sample {
 	import com.thenitro.match3sample.items.Red;
 	import com.thenitro.match3sample.items.Yellow;
 	
-	import ndatas.grid.IGridObject;
+	import ncollections.grid.Grid;
+	import ncollections.grid.IGridObject;
 	
 	import ngine.display.gridcontainer.GridContainer;
 	import ngine.display.gridcontainer.animation.TweenGridAnimator;
+	import ngine.math.GraphUtils;
 	
 	import nmatch3.Match3Logic;
 	import nmatch3.controllers.Controller;
@@ -18,7 +20,7 @@ package com.thenitro.match3sample {
 	import starling.events.Event;
 	
 	public final class Game extends Sprite {
-		private static const TYPES:Vector.<Class> = new <Class>[ Red, Blue, Green, Yellow, Cyan ];
+		private static const TYPES:Array = [ Red, Blue, Green, Yellow, Cyan ];
 		
 		private static const FIELD_X:uint = 10;
 		private static const FIELD_Y:uint = 10;
@@ -61,10 +63,10 @@ package com.thenitro.match3sample {
 			_generator = new BFSGenerator();
 			_generator.setWaveDepth(WAVE_DEPTH);
 			
-			_logic = new Match3Logic(TYPES);
+			_logic = new Match3Logic();
 			
 			_logic.init(_cellWidth, _cellHeight, _generator, new TweenGridAnimator());
-			_logic.itemsNum = TYPES.length;//If you want make progress that depends on levels change this value to lower
+			_logic.availableTypes = TYPES;
 			
 			_controller = new Controller();
 			
@@ -122,14 +124,18 @@ package com.thenitro.match3sample {
 			var item:IGridObject = _selected[_index] as IGridObject;	
 			
 			_logic.addEventListener(Match3Logic.ITEM_FINDED, itemFindedEventHandler);
-			_logic.findItem(item.indexX, item.indexY, _grid, WAVE_DEPTH);
+			_logic.findItem(item.indexX, item.indexY, _grid, WAVE_DEPTH, match3Collector);
 		};
 		
 		private function findGrid():void {
 			_newDropped = false;
 			
 			_logic.addEventListener(Match3Logic.GRID_FINDED, gridFindedEventHandler);
-			_logic.findGrid(_grid, WAVE_DEPTH);
+			_logic.findGrid(_grid, WAVE_DEPTH, match3Collector);
+		};
+		
+		private function match3Collector(pX:int, pY:int, pGrid:Grid):Array {
+			return GraphUtils.bfs(pX, pY, pGrid, GraphUtils.addNeighborsVerticalHorizintal);
 		};
 		
 		/**
@@ -204,6 +210,7 @@ package com.thenitro.match3sample {
 			_newDropped = true;
 			
 			_logic.dropNew(pEvent.data.indexX, pEvent.data.indexY, _grid);
+			_logic.pushTop(pEvent.data.indexX, pEvent.data.indexY, _grid);
 		};
 		
 		/**

@@ -6,7 +6,7 @@ package {
 	public class NMatch3Sample extends DocumentClass {
 		
 		public function NMatch3Sample() {
-			super(Game, true);
+			super(Game);
 		};
 	};
 }

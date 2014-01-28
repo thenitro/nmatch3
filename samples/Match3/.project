@@ -16,24 +16,24 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>[source path] ndatas-source</name>
+			<name>[source path] ncollections-source</name>
 			<type>2</type>
-			<location>E:/ndatas/source</location>
+			<location>D:/ncollections/source</location>
 		</link>
 		<link>
 			<name>[source path] ngine-source</name>
 			<type>2</type>
-			<location>E:/ngine/source</location>
+			<location>D:/ngine/source</location>
 		</link>
 		<link>
 			<name>[source path] nmatch3-source</name>
 			<type>2</type>
-			<location>E:/nmatch3/source</location>
+			<location>D:/nmatch3/source</location>
 		</link>
 		<link>
 			<name>[source path] npooling-source</name>
 			<type>2</type>
-			<location>E:/npooling/source</location>
+			<location>D:/npooling/source</location>
 		</link>
 	</linkedResources>
 </projectDescription>
