@@ -164,7 +164,8 @@ package nmatch3 {
 								pObject:IVisualGridObject = null):void {
 			if (!pObject) {
 				pObject = _generator.generateOne(pIndexX, 0, pGrid, 
-												 availableTypes, _cellWidth, _cellHeight) as IVisualGridObject;
+												 availableTypes, 
+												 _cellWidth, _cellHeight) as IVisualGridObject;
 			}
 			
 			pObject.alpha = 0.0;
@@ -175,7 +176,7 @@ package nmatch3 {
 			
 			Starling.juggler.add(tween);
 			
-			pGrid.addVisual(pGrid.add(pIndexX, 0, pObject) as IGridObject);
+			pGrid.addVisual(pGrid.add(pIndexX, 0, pObject));
 		};
 		
 		public function swap(pAX:uint, pAY:uint, pBX:uint, pBY:uint, pGrid:IGridContainer):void {
