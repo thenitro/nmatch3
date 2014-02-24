@@ -51,17 +51,17 @@ package nmatch3.controllers {
 				return;
 			}
 			
-			var touch:Touch = pEvent.getTouch(_container.canvas);
+			var touch:Touch = pEvent.touches[0];
 			
 			if (touch) {
 				if (touch.phase == TouchPhase.BEGAN) {
-					_start       = touch.target.parent as IGridObject;
+					_start = touch.target.parent as IGridObject;
 					
 					dispatchEventWith(START_PICKED, false, _start);
 				}
 				
-				if (touch.phase == TouchPhase.HOVER ||
-					touch.phase == TouchPhase.MOVED) {
+				if ((touch.phase == TouchPhase.HOVER ||
+					 touch.phase == TouchPhase.MOVED) && _start) {
 					
 					findEnd(touch);
 				}
@@ -70,6 +70,9 @@ package nmatch3.controllers {
 					_blocked = true;
 					
 					dispatchEventWith(EXECUTE, false, [ _start, _end ]);
+				
+					resetStart();
+					resetEnd();
 				}
 			}
 		};

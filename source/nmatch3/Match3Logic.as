@@ -230,6 +230,7 @@ package nmatch3 {
 				nextItem();
 				return;
 			}
+			
 			dispatchEventWith(ROW_FINDED);
 		};
 		
