@@ -6,9 +6,7 @@ package nmatch3 {
 	import ngine.display.gridcontainer.animation.GridAnimator;
 	import ngine.display.gridcontainer.interfaces.IGridContainer;
 	import ngine.display.gridcontainer.interfaces.IVisualGridObject;
-	import ngine.math.GraphUtils;
 	
-	import nmatch3.generators.BFSGenerator;
 	import nmatch3.generators.IGenerator;
 	
 	import npooling.Pool;
@@ -164,7 +162,8 @@ package nmatch3 {
 								pObject:IVisualGridObject = null):void {
 			if (!pObject) {
 				pObject = _generator.generateOne(pIndexX, 0, pGrid, 
-												 availableTypes, _cellWidth, _cellHeight) as IVisualGridObject;
+												 availableTypes, 
+												 _cellWidth, _cellHeight) as IVisualGridObject;
 			}
 			
 			pObject.alpha = 0.0;
@@ -175,7 +174,7 @@ package nmatch3 {
 			
 			Starling.juggler.add(tween);
 			
-			pGrid.addVisual(pGrid.add(pIndexX, 0, pObject) as IGridObject);
+			pGrid.addVisual(pGrid.add(pIndexX, 0, pObject));
 		};
 		
 		public function swap(pAX:uint, pAY:uint, pBX:uint, pBY:uint, pGrid:IGridContainer):void {
