@@ -65,11 +65,6 @@ package nmatch3 {
 			var turnsToThink:Number = turnsDelta / (_thinkTime / 1000); //time
 			var waveDelta:Number    = pRemovedMobs / _waveDepth; //combinations
 			
-			trace("Match3Analytics.calculatePlayerSkill(pRemovedMobs): " + turnsDelta);
-			trace("Match3Analytics.calculatePlayerSkill(pRemovedMobs): " + turnsToThink);
-			trace("Match3Analytics.calculatePlayerSkill(pRemovedMobs): " + waveDelta);
-			trace("Match3Analytics.calculatePlayerSkill(pRemovedMobs): " + (turnsToThink  * waveDelta));
-			
 			return turnsToThink * waveDelta;
 		};
 		

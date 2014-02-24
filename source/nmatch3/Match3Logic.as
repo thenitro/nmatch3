@@ -6,9 +6,7 @@ package nmatch3 {
 	import ngine.display.gridcontainer.animation.GridAnimator;
 	import ngine.display.gridcontainer.interfaces.IGridContainer;
 	import ngine.display.gridcontainer.interfaces.IVisualGridObject;
-	import ngine.math.GraphUtils;
 	
-	import nmatch3.generators.BFSGenerator;
 	import nmatch3.generators.IGenerator;
 	
 	import npooling.Pool;
