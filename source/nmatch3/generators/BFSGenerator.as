@@ -2,10 +2,13 @@ package nmatch3.generators {
 	import ncollections.grid.Grid;
 	import ncollections.grid.IGridObject;
 	
-	import ngine.display.gridcontainer.interfaces.IGridContainer;
 	import ngine.math.GraphUtils;
 	
+	import npooling.Pool;
+	
 	public final class BFSGenerator implements IGenerator {
+		private static var _pool:Pool = Pool.getInstance();
+		
 		private var _waveSize:uint;
 		private var _playerSkill:uint;
 		
@@ -58,9 +61,16 @@ package nmatch3.generators {
 		private function generateItem(pElements:Array,
 									  pCellWidth:Number, pCellHeight:Number):IGridObject {
 			var index:uint = Math.floor(pElements.length * Math.random());
-			var Type:Class = pElements[index];			
+			var Type:Class = pElements[index];		
 			
-			return new Type(pCellWidth, pCellHeight);
+			var instance:Object = _pool.get(Type);
+			
+			if (!instance) {
+				_pool.allocate(Type, 1);
+				instance = new Type(pCellWidth, pCellHeight);
+			}
+			
+			return instance as IGridObject;
 		};
 	}
 }
