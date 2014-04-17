@@ -13,6 +13,8 @@ package nmatch3.bonuses {
 		protected var _grid:Grid;
 		protected var _logic:Match3Logic;
 		
+		protected var _collectorMethod:Function;
+		
 		protected var _x:uint;
 		protected var _y:uint;
 		
@@ -27,11 +29,14 @@ package nmatch3.bonuses {
 			return null;
 		};
 		
-		public function init(pGrid:Grid, pLogic:Match3Logic, pDepth:uint):void {
+		public function init(pGrid:Grid, pLogic:Match3Logic, pDepth:uint, 
+							 pCollectorMethod:Function):void {
 			_grid  = pGrid;
 			_logic = pLogic;
 			
 			_depth = pDepth;
+			
+			_collectorMethod = pCollectorMethod;
 		};
 		
 		public function setCoords(pX:uint, pY:uint):void {

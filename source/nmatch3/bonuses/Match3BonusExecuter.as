@@ -16,21 +16,26 @@ package nmatch3.bonuses {
 		
 		private var _depth:uint;
 		
+		private var _collectorMethod:Function;
+		
 		public function Match3BonusExecuter() {
 			super();
 		};
 		
-		public function init(pGrid:Grid, pLogic:Match3Logic, pDepth:uint):void {
+		public function init(pGrid:Grid, pLogic:Match3Logic, pDepth:uint, 
+							 pCollectorMethod:Function):void {
 			_grid  = pGrid;
 			_logic = pLogic;
 			
 			_depth = pDepth;
+			
+			_collectorMethod = pCollectorMethod;
 		};
 		
 		public function executeTo(pX:uint, pY:uint, pBonus:IMatch3Bonus):void {
 			trace("Match3BonusExecuter.executeTo(pX, pY, pBonus)");
 			
-			pBonus.init(_grid, _logic, _depth);
+			pBonus.init(_grid, _logic, _depth, _collectorMethod);
 			pBonus.setCoords(pX, pY);
 			
 			(pBonus as AbstractBonus).addEventListener(AbstractBonus.COMPLETED, 
