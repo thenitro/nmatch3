@@ -1,8 +1,6 @@
 package nmatch3.bonuses {
 	import ncollections.grid.Grid;
 	
-	import ngine.display.gridcontainer.interfaces.IGridContainer;
-	
 	import nmatch3.Match3Logic;
 	
 	import starling.events.Event;
@@ -33,8 +31,6 @@ package nmatch3.bonuses {
 		};
 		
 		public function executeTo(pX:uint, pY:uint, pBonus:IMatch3Bonus):void {
-			trace("Match3BonusExecuter.executeTo(pX, pY, pBonus)");
-			
 			pBonus.init(_grid, _logic, _depth, _collectorMethod);
 			pBonus.setCoords(pX, pY);
 			
