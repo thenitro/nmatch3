@@ -1,12 +1,12 @@
 package nmatch3.generators {
-	import ncollections.grid.Grid;
-	import ncollections.grid.IGridObject;
-	
-	import ngine.math.GraphUtils;
-	
-	import npooling.Pool;
-	
-	public final class BFSGenerator implements IGenerator {
+    import ncollections.grid.Grid;
+    import ncollections.grid.IGridObject;
+
+    import nmath.GraphUtils;
+
+    import npooling.Pool;
+
+    public final class BFSGenerator implements IGenerator {
 		private static var _pool:Pool = Pool.getInstance();
 		
 		private var _waveSize:uint;
@@ -47,7 +47,7 @@ package nmatch3.generators {
 			
 			pGrid.add(pI, pJ, item);
 			
-			while (GraphUtils.bfs(pI, pJ, pGrid, 
+			while (GraphUtils.bfs(pI, pJ, pGrid,
 				   GraphUtils.addNeighborsVerticalHorizintal).length >= _waveSize - _playerSkill) {
 				item = generateItem(pElements, pCellWidth, pCellHeight);
 				
