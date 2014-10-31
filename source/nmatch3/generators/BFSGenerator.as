@@ -63,7 +63,7 @@ package nmatch3.generators {
 			var index:uint = Math.floor(pElements.length * Math.random());
 			var Type:Class = pElements[index];		
 			
-			var instance:Object = _pool.get(Type);
+			var instance:Object = _pool.get(Type, false);
 			
 			if (!instance) {
 				_pool.allocate(Type, 1);

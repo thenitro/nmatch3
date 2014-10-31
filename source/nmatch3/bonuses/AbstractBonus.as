@@ -9,6 +9,8 @@ package nmatch3.bonuses {
 	
 	public class AbstractBonus extends EventDispatcher implements IMatch3Bonus {
 		public static const COMPLETED:String = 'complete';
+
+        private var _disposed:Boolean;
 		
 		protected var _grid:Grid;
 		protected var _logic:Match3Logic;
@@ -28,6 +30,10 @@ package nmatch3.bonuses {
 			throw new IllegalOperationError('AbstractBonus.reflection: must be overriden!');
 			return null;
 		};
+
+        public function get disposed():Boolean {
+            return _disposed;
+        };
 		
 		public function init(pGrid:Grid, pLogic:Match3Logic, pDepth:uint, 
 							 pCollectorMethod:Function):void {
@@ -54,6 +60,8 @@ package nmatch3.bonuses {
 		};
 		
 		public function dispose():void {
+            _disposed = true;
+
 			_grid  = null;
 			_logic = null;
 		};
