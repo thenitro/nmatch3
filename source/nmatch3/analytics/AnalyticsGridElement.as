@@ -13,6 +13,7 @@ package nmatch3.analytics {
 		private var _indexY:int;
 		
 		private var _reflection:Class;
+        private var _disposed:Boolean;
 		
 		private var _locked:Boolean;
 		
@@ -45,6 +46,10 @@ package nmatch3.analytics {
 		public function get reflection():Class {
 			return _reflection;
 		};
+
+        public function get disposed():Boolean {
+            return _disposed;
+        };
 		
 		public function setReflection(pClass:Class):void {
 			_reflection = pClass;

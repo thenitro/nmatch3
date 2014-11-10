@@ -207,7 +207,7 @@ package nmatch3 {
 			
 			_rowIndex++;
 			
-			if (_rowIndex < _grid.sizeY) {
+			if (_rowIndex < _grid.maxY) {
 				nextSample();
 				return;
 			}
@@ -225,7 +225,7 @@ package nmatch3 {
 			
 			_colIndex++;
 			
-			if (_colIndex < _grid.sizeX) {
+			if (_colIndex < _grid.maxX) {
 				nextItem();
 				return;
 			}

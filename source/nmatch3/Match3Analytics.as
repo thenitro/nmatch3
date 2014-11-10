@@ -1,19 +1,18 @@
 package nmatch3 {
-	import flash.events.TimerEvent;
-	import flash.utils.Timer;
-	import flash.utils.getTimer;
-	
-	import ncollections.grid.Grid;
-	import ncollections.grid.IGridObject;
-	
-	import ngine.display.gridcontainer.interfaces.IGridContainer;
-	import ngine.math.GraphUtils;
-	
-	import npooling.Pool;
-	
-	import starling.events.EventDispatcher;
-	
-	public class Match3Analytics extends EventDispatcher {
+    import flash.events.TimerEvent;
+    import flash.utils.Timer;
+    import flash.utils.getTimer;
+
+    import ncollections.grid.Grid;
+    import ncollections.grid.IGridObject;
+
+    import nmath.GraphUtils;
+
+    import npooling.Pool;
+
+    import starling.events.EventDispatcher;
+
+    public class Match3Analytics extends EventDispatcher {
 		public static const TIME_OUT_EVENT:String     = 'think_too_much';
 		public static const TURNS_FINDED_EVENT:String = 'turns_finded';
 		
