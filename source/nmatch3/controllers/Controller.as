@@ -1,14 +1,18 @@
 package nmatch3.controllers {
-	import ncollections.grid.IGridObject;
-	
-	import ngine.display.gridcontainer.GridContainer;
-	
-	import starling.events.EventDispatcher;
-	import starling.events.Touch;
-	import starling.events.TouchEvent;
-	import starling.events.TouchPhase;
-	
-	public final class Controller extends EventDispatcher {
+    import ncollections.grid.IGridObject;
+
+    import ngine.display.gridcontainer.GridContainer;
+
+    import starling.display.Quad;
+
+    import starling.display.Quad;
+
+    import starling.events.EventDispatcher;
+    import starling.events.Touch;
+    import starling.events.TouchEvent;
+    import starling.events.TouchPhase;
+
+    public final class Controller extends EventDispatcher {
 		public static const START_PICKED:String = 'start_picked';
 		public static const START_RESET:String  = 'start_reset';
 		
@@ -23,6 +27,8 @@ package nmatch3.controllers {
 		private var _end:IGridObject;
 		
 		private var _blocked:Boolean;
+
+        private var _startTouch:Touch;
 		
 		public function Controller() {			
 			super();
@@ -55,6 +61,7 @@ package nmatch3.controllers {
 			
 			if (touch) {
 				if (touch.phase == TouchPhase.BEGAN) {
+                    _startTouch = touch.clone();
 					_start = touch.target.parent as IGridObject;
 					
 					dispatchEventWith(START_PICKED, false, _start);
@@ -81,23 +88,27 @@ package nmatch3.controllers {
 			if (!_start) {
 				return;
 			}
+
+            resetEnd();
+
+            var diffX:Number = pTouch.globalX - _startTouch.globalX;
+            var diffY:Number = pTouch.globalY - _startTouch.globalY;
+
+            if (Math.abs(diffX) >= Math.abs(diffY)) {
+                diffY = 0;
+            } else {
+                diffX = 0;
+            }
 			
-			var indexX:uint = Math.round((pTouch.globalX - _container.canvas.x - _container.cellWidth / 2) / _container.cellWidth);
-			var indexY:uint = Math.round((pTouch.globalY - _container.canvas.y - _container.cellHeight / 2) / _container.cellHeight);
-			
-			var dx:Number = _start.indexX - indexX;
-			var dy:Number = _start.indexY - indexY;
-			
-			var signDx:Number = normalize(dx);
-			var signDy:Number = normalize(dy);
-			
+			var signDx:Number = normalize(diffX);
+			var signDy:Number = normalize(diffY);
+
 			if (Math.abs(signDx) == Math.abs(signDy)) {
-				resetEnd();
 				return;
 			}
 			
-			var item:IGridObject = _container.take(_start.indexX - signDx, 
-												   _start.indexY - signDy) as IGridObject;
+			var item:IGridObject = _container.take(_start.indexX + signDx,
+												   _start.indexY + signDy) as IGridObject;
 			
 			if (!item) {
 				return;
