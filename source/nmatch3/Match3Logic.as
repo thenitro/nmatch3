@@ -21,11 +21,8 @@ package nmatch3 {
 		public static const ITEM_FINDED:String     = 'itemFindedEvent';
 		public static const ITEM_REMOVED:String    = 'itemRemovedEventHandler'
 		public static const ROW_FINDED:String      = 'rowFindedEvent';
-		public static const COL_FINDED:String      = 'colFindedEvent';
 		public static const GRID_FINDED:String     = 'gridFindedEvent';
 		public static const FLOOD_EVENT:String     = 'floodEvent';
-		public static const TURNS_CHANGED:String   = 'turnsChangedEvent';
-		public static const GAME_OVER_EVENT:String = 'gameOverEvent';
 		public static const SWAP_ANIMATION:String  = 'swapAnimatedEvent';
 		
 		public static const ANIMATION_TIME:Number  = 0.35;
