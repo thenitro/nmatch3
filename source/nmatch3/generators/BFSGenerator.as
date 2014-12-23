@@ -48,7 +48,8 @@ package nmatch3.generators {
 			pGrid.add(pI, pJ, item);
 			
 			while (GraphUtils.bfs(pI, pJ, pGrid,
-				   GraphUtils.addNeighborsVerticalHorizintal).length >= _waveSize - _playerSkill) {
+				    GraphUtils.addNeighborsVerticalHorizintal,
+                    GraphUtils.reflectionComparator).length >= _waveSize - _playerSkill) {
 				item = generateItem(pElements, pCellWidth, pCellHeight);
 				
 				pGrid.remove(pI, pJ);
