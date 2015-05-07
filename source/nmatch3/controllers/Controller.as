@@ -75,8 +75,8 @@ package nmatch3.controllers {
 				
 				if (touch.phase == TouchPhase.ENDED && _start && _end) {
 					_blocked = true;
-					
-					dispatchEventWith(EXECUTE, false, [ _start, _end ]);
+
+					dispatchEventWith(EXECUTE, false, new <IGridObject>[ _start, _end ]);
 				
 					resetStart();
 					resetEnd();

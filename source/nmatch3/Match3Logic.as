@@ -19,7 +19,7 @@ package nmatch3 {
 	public class Match3Logic extends EventDispatcher {
 		public static const MATCH_FINDED:String    = 'matchFindedEvent';
 		public static const ITEM_FINDED:String     = 'itemFindedEvent';
-		public static const ITEM_REMOVED:String    = 'itemRemovedEventHandler'
+		public static const ITEM_REMOVED:String    = 'itemRemovedEventHandler';
 		public static const ROW_FINDED:String      = 'rowFindedEvent';
 		public static const GRID_FINDED:String     = 'gridFindedEvent';
 		public static const FLOOD_EVENT:String     = 'floodEvent';
@@ -100,11 +100,12 @@ package nmatch3 {
 		
 		public function findItem(pX:uint, pY:uint, pGrid:Grid, pDepth:uint, pCollector:Function):Boolean {
 			var samples:Array = pCollector(pX, pY, pGrid) as Array;
+			var item:IGridObject;
 			
 			if (samples.length >= pDepth) {	
 				dispatchEventWith(MATCH_FINDED, false, samples);
 				
-				for each (var item:IGridObject in samples) {					
+				for each (item in samples) {
 					removeItem(item, pGrid);
 				}
 				
@@ -211,14 +212,14 @@ package nmatch3 {
 			
 			dispatchEventWith(GRID_FINDED);
 		};
-		
+
 		private function nextSample():void {
 			addEventListener(ROW_FINDED, updateRowIndex);
 			findRow(_rowIndex, _grid, _depth, _itemsCollector);
 		};
 		
 		private function updateColIndex(pEvent:Event):void {
-			removeEventListener(ITEM_FINDED, updateRowIndex);
+			removeEventListener(ITEM_FINDED, updateColIndex);
 			
 			_colIndex++;
 			
@@ -229,7 +230,7 @@ package nmatch3 {
 			
 			dispatchEventWith(ROW_FINDED);
 		};
-		
+
 		private function nextItem():void {
 			addEventListener(ITEM_FINDED, updateColIndex);
 			findItem(_colIndex, _rowIndex, _grid, _depth, _itemsCollector);
