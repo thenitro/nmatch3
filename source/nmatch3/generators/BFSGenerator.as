@@ -1,5 +1,7 @@
 package nmatch3.generators {
-    import ncollections.grid.Grid;
+	import nmatch3.models.LocationShapeVO;
+
+	import ncollections.grid.Grid;
     import ncollections.grid.IGridObject;
 
     import nmath.GraphUtils;
@@ -31,10 +33,13 @@ package nmatch3.generators {
 		public function generateGrid(pGrid:Grid, 
 									 pElements:Array, 
 									 pEndX:uint, pEndY:uint, 
-									 pCellWidth:Number, pCellHeight:Number):void {
+									 pCellWidth:Number, pCellHeight:Number,
+									 pShape:LocationShapeVO):void {
 			for (var i:uint = 0; i < pEndX; i++) {
 				for (var j:uint = 0; j < pEndY; j++) {
-					generateOne(i, j, pGrid, pElements, pCellWidth, pCellHeight);
+					if (pShape == null || pShape.canPlace(i, j)) {
+						generateOne(i, j, pGrid, pElements, pCellWidth, pCellHeight);
+					}
 				}
 			}
 		};

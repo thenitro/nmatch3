@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="Flex" version="4">
+  <component name="FlexBuildConfigurationManager" active="nmatch3-tests">
+    <configurations>
+      <configuration name="nmatch3-tests" pure-as="true" main-class="Main" output-file="Main.swf" output-folder="$MODULE_DIR$/out/production/nmatch3-tests">
+        <dependencies target-player="22.0">
+          <entries>
+            <entry library-id="b1978dec-1a50-46d3-bc35-c1e0ba1eb2bb">
+              <dependency linkage="Merged" />
+            </entry>
+          </entries>
+          <sdk name="22.0.0" />
+        </dependencies>
+        <compiler-options />
+        <packaging-air-desktop />
+        <packaging-android />
+        <packaging-ios />
+      </configuration>
+    </configurations>
+    <compiler-options />
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../source">
+      <sourceFolder url="file://$MODULE_DIR$/../source" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../npooling/source">
+      <sourceFolder url="file://$MODULE_DIR$/../../npooling/source" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="22.0.0" jdkType="Flex SDK Type (new)" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="b1978dec-1a50-46d3-bc35-c1e0ba1eb2bb" />
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../libs/flexunit_for_starling/libs/flexunit-4.2.0-20140410-as3_4.12.0.swc!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+  </component>
+</module>
